@@ -109,6 +109,8 @@ class singsong(Plugin):
                 file_name = query + ".mp3"
                 file_path = os.path.join("tmp", file_name)
                 try:
+                    if not os.path.exists("tmp"):  # 检查 "tmp" 目录是否存在，如果不存在则创建
+                        os.makedirs("tmp")
                     with urllib.request.urlopen(voice_url) as response, open(file_path, 'wb') as out_file:
                         out_file.write(response.read())
                     logger.info(f"[singsong] Music ID：{song_id} 下载成功, {voice_url}")
