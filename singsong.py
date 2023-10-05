@@ -38,6 +38,8 @@ class singsong(Plugin):
             raise e
         
     def on_handle_context(self, e_context: EventContext):
+        if e_context["context"].type != ContextType.TEXT:
+            return
         content = e_context["context"].content
         if content.startswith("播放"):
             logger.info(f"[singsong] {content}")
